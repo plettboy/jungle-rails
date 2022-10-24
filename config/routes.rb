@@ -2,6 +2,17 @@ Rails.application.routes.draw do
 
   get "about/index"
 
+  #get login form
+    get '/login' => 'sessions#new'
+    #post a login request
+    post '/login' => 'sessions#create'
+    #when logged out, utilize the destroy session method
+    get '/logout' => 'sessions#destroy'
+  
+    #get register form
+    get '/register' => 'users#new'
+    #send new data to the db
+    post '/users' => 'users#create'
 
   root to: 'products#index'
 
@@ -20,6 +31,8 @@ Rails.application.routes.draw do
     resources :products, except: [:edit, :update, :show]
     resources :categories, only: [:index, :new, :create]
   end
+
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.
